@@ -26,19 +26,19 @@
 
 ```mermaid
 mindmap
-  root((설계 원칙))
-    바이브 코딩
-      직관적 구현
-      빠른 프로토타이핑
-      점진적 개선
-    아르민 로나허 철학
-      단순함 우선
-      표준 라이브러리 활용
-      실용적 접근
-    RealWorld 표준
-      검증된 API 스펙
-      일관된 기능 구현
-      커뮤니티 호환성
+  root("설계 원칙")
+    "바이브 코딩"
+      "직관적 구현"
+      "빠른 프로토타이핑"
+      "점진적 개선"
+    "아르민 로나허 철학"
+      "단순함 우선"
+      "표준 라이브러리 활용"
+      "실용적 접근"
+    "RealWorld 표준"
+      "검증된 API 스펙"
+      "일관된 기능 구현"
+      "커뮤니티 호환성"
 ```
 
 ### 1.3 시스템 목표
@@ -54,29 +54,29 @@ mindmap
 
 ```mermaid
 graph TB
-    subgraph "클라이언트"
-        A[React SPA<br/>TypeScript + Tailwind]
+    subgraph Client["클라이언트"]
+        A["React SPA<br/>TypeScript + Tailwind"]
     end
-    
-    subgraph "웹 계층"
-        B[HTTP Router<br/>net/http + 미들웨어]
-        C[CORS 미들웨어]
-        D[JWT 인증 미들웨어]
-        E[로깅 미들웨어]
+
+    subgraph Web["웹 계층"]
+        B["HTTP Router<br/>net/http + 미들웨어"]
+        C["CORS 미들웨어"]
+        D["JWT 인증 미들웨어"]
+        E["로깅 미들웨어"]
     end
-    
-    subgraph "비즈니스 로직"
-        F[사용자 서비스]
-        G[게시글 서비스]
-        H[댓글 서비스]
-        I[인증 서비스]
+
+    subgraph Business["비즈니스 로직"]
+        F["사용자 서비스"]
+        G["게시글 서비스"]
+        H["댓글 서비스"]
+        I["인증 서비스"]
     end
-    
-    subgraph "데이터 계층"
-        J[SQLite DB<br/>순수 SQL]
-        K[파일 시스템<br/>이미지 저장]
+
+    subgraph Data["데이터 계층"]
+        J["SQLite DB<br/>순수 SQL"]
+        K["파일 시스템<br/>이미지 저장"]
     end
-    
+
     A --> B
     B --> C
     C --> D
@@ -96,30 +96,30 @@ graph TB
 
 ```mermaid
 graph LR
-    subgraph "Presentation Layer"
-        A[HTTP Handlers]
-        B[Middleware]
-        C[Request/Response Models]
+    subgraph Presentation["Presentation Layer"]
+        A["HTTP Handlers"]
+        B["Middleware"]
+        C["Request/Response Models"]
     end
-    
-    subgraph "Application Layer"
-        D[Use Cases]
-        E[DTOs]
-        F[Validators]
+
+    subgraph Application["Application Layer"]
+        D["Use Cases"]
+        E["DTOs"]
+        F["Validators"]
     end
-    
-    subgraph "Domain Layer"
-        G[Entities]
-        H[Business Rules]
-        I[Interfaces]
+
+    subgraph Domain["Domain Layer"]
+        G["Entities"]
+        H["Business Rules"]
+        I["Interfaces"]
     end
-    
-    subgraph "Infrastructure Layer"
-        J[SQLite Repository]
-        K[JWT Service]
-        L[File Storage]
+
+    subgraph Infrastructure["Infrastructure Layer"]
+        J["SQLite Repository"]
+        K["JWT Service"]
+        L["File Storage"]
     end
-    
+
     A --> D
     B --> A
     D --> G
@@ -133,30 +133,30 @@ graph LR
 
 ```mermaid
 graph TB
-    subgraph "Presentation"
-        A[Pages]
-        B[Components]
-        C[UI Components<br/>shadcn/ui]
+    subgraph Presentation["Presentation"]
+        A["Pages"]
+        B["Components"]
+        C["UI Components<br/>shadcn/ui"]
     end
-    
-    subgraph "State Management"
-        D[Context API<br/>인증 상태]
-        E[React Query<br/>서버 상태]
-        F[Local State<br/>컴포넌트 상태]
+
+    subgraph State["State Management"]
+        D["Context API<br/>인증 상태"]
+        E["React Query<br/>서버 상태"]
+        F["Local State<br/>컴포넌트 상태"]
     end
-    
-    subgraph "Services"
-        G[API Client]
-        H[Auth Service]
-        I[Storage Service]
+
+    subgraph Services["Services"]
+        G["API Client"]
+        H["Auth Service"]
+        I["Storage Service"]
     end
-    
-    subgraph "Routing"
-        J[React Router]
-        K[Protected Routes]
-        L[Route Guards]
+
+    subgraph Routing["Routing"]
+        J["React Router"]
+        K["Protected Routes"]
+        L["Route Guards"]
     end
-    
+
     A --> B
     B --> C
     A --> D
@@ -185,7 +185,7 @@ erDiagram
         datetime created_at
         datetime updated_at
     }
-    
+
     ARTICLE {
         string id PK
         string slug UK
@@ -196,7 +196,7 @@ erDiagram
         datetime created_at
         datetime updated_at
     }
-    
+
     COMMENT {
         string id PK
         string body
@@ -205,39 +205,39 @@ erDiagram
         datetime created_at
         datetime updated_at
     }
-    
+
     TAG {
         string id PK
         string name UK
         datetime created_at
     }
-    
+
     ARTICLE_TAG {
         string article_id FK
         string tag_id FK
     }
-    
+
     FOLLOW {
         string follower_id FK
         string following_id FK
         datetime created_at
     }
-    
+
     FAVORITE {
         string user_id FK
         string article_id FK
         datetime created_at
     }
-    
-    USER ||--o{ ARTICLE : writes
-    USER ||--o{ COMMENT : writes
-    USER ||--o{ FOLLOW : follows
-    USER ||--o{ FOLLOW : followed_by
-    USER ||--o{ FAVORITE : favorites
-    ARTICLE ||--o{ COMMENT : has
-    ARTICLE ||--o{ ARTICLE_TAG : tagged_with
-    ARTICLE ||--o{ FAVORITE : favorited_by
-    TAG ||--o{ ARTICLE_TAG : used_in
+
+    USER ||--o{ ARTICLE : "writes"
+    USER ||--o{ COMMENT : "writes"
+    USER ||--o{ FOLLOW : "follows"
+    USER ||--o{ FOLLOW : "followed_by"
+    USER ||--o{ FAVORITE : "favorites"
+    ARTICLE ||--o{ COMMENT : "has"
+    ARTICLE ||--o{ ARTICLE_TAG : "tagged_with"
+    ARTICLE ||--o{ FAVORITE : "favorited_by"
+    TAG ||--o{ ARTICLE_TAG : "used_in"
 ```
 
 ### 3.2 테이블 스키마
@@ -304,31 +304,31 @@ CREATE INDEX idx_favorites_article_id ON favorites(article_id);
 
 ```mermaid
 graph TB
-    subgraph "API Gateway"
-        A[HTTP Router]
-        B[Rate Limiting]
-        C[Request Logging]
+    subgraph Gateway["API Gateway"]
+        A["HTTP Router"]
+        B["Rate Limiting"]
+        C["Request Logging"]
     end
-    
-    subgraph "Authentication"
-        D[JWT Middleware]
-        E[Optional Auth]
-        F[Required Auth]
+
+    subgraph Authentication["Authentication"]
+        D["JWT Middleware"]
+        E["Optional Auth"]
+        F["Required Auth"]
     end
-    
-    subgraph "Business Logic"
-        G[User Handlers]
-        H[Article Handlers]
-        I[Comment Handlers]
-        J[Profile Handlers]
+
+    subgraph Logic["Business Logic"]
+        G["User Handlers"]
+        H["Article Handlers"]
+        I["Comment Handlers"]
+        J["Profile Handlers"]
     end
-    
-    subgraph "Data Access"
-        K[Repository Pattern]
-        L[Transaction Management]
-        M[Error Handling]
+
+    subgraph DataAccess["Data Access"]
+        K["Repository Pattern"]
+        L["Transaction Management"]
+        M["Error Handling"]
     end
-    
+
     A --> B
     B --> C
     C --> D
@@ -419,40 +419,40 @@ GET    /api/tags                      # 태그 목록 조회
 
 ```mermaid
 graph TB
-    subgraph "App Component"
-        A[App.tsx]
-        B[Router Setup]
-        C[Global Providers]
+    subgraph App["App Component"]
+        A["App.tsx"]
+        B["Router Setup"]
+        C["Global Providers"]
     end
-    
-    subgraph "Layout Components"
-        D[Header]
-        E[Footer]
-        F[Sidebar]
+
+    subgraph Layout["Layout Components"]
+        D["Header"]
+        E["Footer"]
+        F["Sidebar"]
     end
-    
-    subgraph "Page Components"
-        G[HomePage]
-        H[LoginPage]
-        I[ArticlePage]
-        J[ProfilePage]
-        K[EditorPage]
+
+    subgraph Pages["Page Components"]
+        G["HomePage"]
+        H["LoginPage"]
+        I["ArticlePage"]
+        J["ProfilePage"]
+        K["EditorPage"]
     end
-    
-    subgraph "Feature Components"
-        L[ArticleList]
-        M[ArticleCard]
-        N[CommentSection]
-        O[UserProfile]
+
+    subgraph Features["Feature Components"]
+        L["ArticleList"]
+        M["ArticleCard"]
+        N["CommentSection"]
+        O["UserProfile"]
     end
-    
-    subgraph "UI Components"
-        P[Button]
-        Q[Input]
-        R[Modal]
-        S[Spinner]
+
+    subgraph UI["UI Components"]
+        P["Button"]
+        Q["Input"]
+        R["Modal"]
+        S["Spinner"]
     end
-    
+
     A --> B
     A --> C
     C --> D
@@ -471,24 +471,24 @@ graph TB
 
 ```mermaid
 graph LR
-    subgraph "Global State"
-        A[Auth Context]
-        B[Theme Context]
+    subgraph Global["Global State"]
+        A["Auth Context"]
+        B["Theme Context"]
     end
-    
-    subgraph "Server State"
-        C[React Query]
-        D[Articles Cache]
-        E[User Cache]
-        F[Comments Cache]
+
+    subgraph Server["Server State"]
+        C["React Query"]
+        D["Articles Cache"]
+        E["User Cache"]
+        F["Comments Cache"]
     end
-    
-    subgraph "Local State"
-        G[Form State]
-        H[UI State]
-        I[Component State]
+
+    subgraph Local["Local State"]
+        G["Form State"]
+        H["UI State"]
+        I["Component State"]
     end
-    
+
     A --> G
     C --> D
     C --> E
@@ -511,14 +511,14 @@ graph TB
     A --> F["Editor (/editor)"]
     A --> G["Edit Article (/editor/:slug)"]
     A --> H["Settings (/settings)"]
-    
-    subgraph "Protected Routes"
+
+    subgraph Protected["Protected Routes"]
         F
         G
         H
     end
-    
-    subgraph "Public Routes"
+
+    subgraph Public["Public Routes"]
         B
         C
         D
@@ -532,30 +532,30 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "Frontend Security"
-        A[XSS Protection]
-        B[CSRF Protection]
-        C[Input Validation]
+    subgraph Frontend["Frontend Security"]
+        A["XSS Protection"]
+        B["CSRF Protection"]
+        C["Input Validation"]
     end
-    
-    subgraph "API Security"
-        D[JWT Authentication]
-        E[CORS Configuration]
-        F[Rate Limiting]
+
+    subgraph API["API Security"]
+        D["JWT Authentication"]
+        E["CORS Configuration"]
+        F["Rate Limiting"]
     end
-    
-    subgraph "Data Security"
-        G[Password Hashing]
-        H[SQL Injection Prevention]
-        I[Data Validation]
+
+    subgraph Data["Data Security"]
+        G["Password Hashing"]
+        H["SQL Injection Prevention"]
+        I["Data Validation"]
     end
-    
-    subgraph "Infrastructure Security"
-        J[HTTPS Enforcement]
-        K[Security Headers]
-        L[Container Security]
+
+    subgraph Infrastructure["Infrastructure Security"]
+        J["HTTPS Enforcement"]
+        K["Security Headers"]
+        L["Container Security"]
     end
-    
+
     A --> D
     B --> E
     C --> F
@@ -574,15 +574,15 @@ sequenceDiagram
     participant C as Client
     participant A as API Server
     participant D as Database
-    
+
     C->>A: POST /api/users/login
     A->>D: 사용자 인증 확인
     D-->>A: 사용자 정보 반환
     A->>A: JWT 토큰 생성
     A-->>C: JWT 토큰 반환
-    
+
     Note over C: 토큰을 로컬스토리지에 저장
-    
+
     C->>A: GET /api/articles (with JWT)
     A->>A: JWT 토큰 검증
     A->>D: 데이터 조회
@@ -637,19 +637,19 @@ func CheckPasswordHash(password, hash string) bool {
 
 ```mermaid
 graph TB
-    subgraph "Local Development"
-        A[Docker Compose]
-        B[Frontend Container<br/>React Dev Server]
-        C[Backend Container<br/>Go Application]
-        D[Database<br/>SQLite File]
+    subgraph Dev["Local Development"]
+        A["Docker Compose"]
+        B["Frontend Container<br/>React Dev Server"]
+        C["Backend Container<br/>Go Application"]
+        D["Database<br/>SQLite File"]
     end
-    
-    subgraph "Development Tools"
-        E[Hot Reload]
-        F[Live Logging]
-        G[Database GUI]
+
+    subgraph Tools["Development Tools"]
+        E["Hot Reload"]
+        F["Live Logging"]
+        G["Database GUI"]
     end
-    
+
     A --> B
     A --> C
     A --> D
@@ -662,26 +662,26 @@ graph TB
 
 ```mermaid
 graph TB
-    subgraph "Load Balancer"
-        A[Nginx/Traefik]
+    subgraph LB["Load Balancer"]
+        A["Nginx/Traefik"]
     end
-    
-    subgraph "Application Layer"
-        B[Frontend Container<br/>Static Files]
-        C[Backend Container<br/>Go Binary]
+
+    subgraph App["Application Layer"]
+        B["Frontend Container<br/>Static Files"]
+        C["Backend Container<br/>Go Binary"]
     end
-    
-    subgraph "Data Layer"
-        D[SQLite Database<br/>Persistent Volume]
-        E[File Storage<br/>Static Assets]
+
+    subgraph DataLayer["Data Layer"]
+        D["SQLite Database<br/>Persistent Volume"]
+        E["File Storage<br/>Static Assets"]
     end
-    
-    subgraph "Monitoring"
-        F[Logs Aggregation]
-        G[Health Checks]
-        H[Metrics Collection]
+
+    subgraph Monitor["Monitoring"]
+        F["Logs Aggregation"]
+        G["Health Checks"]
+        H["Metrics Collection"]
     end
-    
+
     A --> B
     A --> C
     C --> D
